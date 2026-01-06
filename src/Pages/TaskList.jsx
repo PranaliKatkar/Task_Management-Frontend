@@ -10,6 +10,7 @@ function TaskList({ folderId }) {
   const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState("");
 
+  // Fetch tasks whenever folderId changes
   useEffect(() => {
     fetchTasks();
   }, [folderId]);
@@ -18,16 +19,45 @@ function TaskList({ folderId }) {
     try {
       const data = await getTasksByFolder(folderId);
       setTasks(Array.isArray(data) ? data : []);
-    } catch {
+    } catch (err) {
+      console.error("Error fetching tasks:", err);
       setTasks([]);
     }
   };
 
   const handleAddTask = async () => {
     if (!title.trim()) return;
-    await addTask(folderId, title);
-    setTitle("");
-    fetchTasks();
+    try {
+      const newTask = await addTask(folderId, title);
+
+      // Update state directly so it shows immediately
+      setTasks((prevTasks) => [...prevTasks, newTask]);
+      setTitle("");
+    } catch (err) {
+      console.error("Error adding task:", err);
+    }
+  };
+
+  const handleCompleteTask = async (taskId) => {
+    try {
+      const updatedTask = await completeTask(taskId);
+      // Update task in state
+      setTasks((prevTasks) =>
+        prevTasks.map((task) => (task.id === taskId ? updatedTask : task))
+      );
+    } catch (err) {
+      console.error("Error completing task:", err);
+    }
+  };
+
+  const handleDeleteTask = async (taskId) => {
+    try {
+      await deleteTask(taskId);
+      // Remove task from state
+      setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+    } catch (err) {
+      console.error("Error deleting task:", err);
+    }
   };
 
   return (
@@ -49,19 +79,18 @@ function TaskList({ folderId }) {
             <span className={task.completed ? "completed" : ""}>
               {task.title}
             </span>
-
             <div className="task-actions">
               {!task.completed && (
                 <button
                   className="icon-btn success"
-                  onClick={() => completeTask(task.id).then(fetchTasks)}
+                  onClick={() => handleCompleteTask(task.id)}
                 >
                   ✓
                 </button>
               )}
               <button
                 className="icon-btn danger"
-                onClick={() => deleteTask(task.id).then(fetchTasks)}
+                onClick={() => handleDeleteTask(task.id)}
               >
                 ✕
               </button>
