@@ -10,7 +10,7 @@ function TaskList({ folderId }) {
   const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState("");
 
-  // Fetch tasks whenever folderId changes
+  // fetch tasks when folderId changes
   useEffect(() => {
     fetchTasks();
   }, [folderId]);
@@ -18,7 +18,8 @@ function TaskList({ folderId }) {
   const fetchTasks = async () => {
     try {
       const data = await getTasksByFolder(folderId);
-      setTasks(Array.isArray(data) ? data : []);
+      // Ensure completed is boolean
+      setTasks(Array.isArray(data) ? data.map(t => ({ ...t, completed: !!t.completed })) : []);
     } catch (err) {
       console.error("Error fetching tasks:", err);
       setTasks([]);
@@ -28,11 +29,9 @@ function TaskList({ folderId }) {
   const handleAddTask = async () => {
     if (!title.trim()) return;
     try {
-      const newTask = await addTask(folderId, title);
-
-      // Update state directly so it shows immediately
-      setTasks((prevTasks) => [...prevTasks, newTask]);
+      await addTask(folderId, title);
       setTitle("");
+      fetchTasks(); // refetch from backend for persistence
     } catch (err) {
       console.error("Error adding task:", err);
     }
@@ -40,11 +39,8 @@ function TaskList({ folderId }) {
 
   const handleCompleteTask = async (taskId) => {
     try {
-      const updatedTask = await completeTask(taskId);
-      // Update task in state
-      setTasks((prevTasks) =>
-        prevTasks.map((task) => (task.id === taskId ? updatedTask : task))
-      );
+      await completeTask(taskId);
+      fetchTasks(); // refetch to update strike-through
     } catch (err) {
       console.error("Error completing task:", err);
     }
@@ -53,8 +49,7 @@ function TaskList({ folderId }) {
   const handleDeleteTask = async (taskId) => {
     try {
       await deleteTask(taskId);
-      // Remove task from state
-      setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+      fetchTasks(); // refetch after delete
     } catch (err) {
       console.error("Error deleting task:", err);
     }

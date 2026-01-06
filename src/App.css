@@ -228,3 +228,8 @@ button:active {
   flex: 1;
   padding: 40px;
 }
+
+.completed {
+  text-decoration: line-through;
+  color: gray;
+}
