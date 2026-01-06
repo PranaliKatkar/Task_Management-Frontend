@@ -1,0 +1,45 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Root Theme Variables */
+:root {
+  --primary: #2563eb;
+  --secondary: #1e293b;
+  --bg: #f4f6f9;
+  --card-bg: #ffffff;
+  --text-dark: #0f172a;
+  --text-light: #64748b;
+  --border: #e2e8f0;
+  --success: #22c55e;
+  --danger: #ef4444;
+}
+
+/* Body */
+body {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* Common */
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: inherit;
+}
+
+input {
+  outline: none;
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
