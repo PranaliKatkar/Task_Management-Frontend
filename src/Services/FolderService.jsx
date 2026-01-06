@@ -1,6 +1,7 @@
 import axios from "axios";
+import API_BASE_URL from "../config/API";
 
-const BASE_URL = "http://localhost:8080/api/folders";
+const BASE_URL = `${API_BASE_URL}/folders`;
 
 export const getFolders = async () => {
   const res = await axios.get(BASE_URL);
