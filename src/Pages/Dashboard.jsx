@@ -32,7 +32,7 @@ function Dashboard() {
     try {
       await axios.post(`${API_BASE_URL}/folders`, {
         name: folderName,
-        userEmail: userEmail
+        user: { email: userEmail }   // <- important change
       });
       setFolderName("");
       fetchFolders();
