@@ -407,3 +407,16 @@ button:active {
 .task-item span[data-priority="Low"] {
   color: #27ae60; 
 }
+
+.task-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.task-controls select {
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+}
