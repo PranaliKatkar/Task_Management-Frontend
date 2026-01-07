@@ -5,7 +5,7 @@ import Register from './Pages/Register';
 import Dashboard from './Pages/Dashboard';
 import MainPage from './Pages/MainPage';
 import AdminUsers from './Pages/AdminUsers';
-import Alerts from './Pages/Alert';
+import Alerts from './Pages/Alerts';
 
 function App() {
   return (
