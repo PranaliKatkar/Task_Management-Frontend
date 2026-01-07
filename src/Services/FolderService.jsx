@@ -9,9 +9,14 @@ export const getFolders = async (userEmail) => {
 };
 
 export const createFolder = async (folderName, userEmail) => {
-  const res = await axios.post(BASE_URL, { name: folderName, userEmail });
+  const res = await axios.post(BASE_URL, {
+    name: folderName,
+    user: { email: userEmail }  
+  });
   return res.data;
 };
+
+
 
 export const deleteFolder = async (folderId) => {
   return axios.delete(`${BASE_URL}/${folderId}`);
