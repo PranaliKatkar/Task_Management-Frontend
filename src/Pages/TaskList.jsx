@@ -42,30 +42,71 @@ function TaskList({ folderId }) {
     catch (err) { console.error("Failed to delete task:", err); }
   };
 
+  const isOverdue = (date) => {
+    if (!date) return false;
+    const today = new Date();
+    const due = new Date(date);
+    return !isNaN(due.getTime()) && due < today;
+  };
+
+  const getPriorityColor = (task) => {
+    if (isOverdue(task.dueDate)) return "red";
+    switch (task.priority) {
+      case "High": return "#e74c3c"; // red
+      case "Medium": return "#f39c12"; // orange
+      case "Low": return "#27ae60"; // green
+      default: return "#555";
+    }
+  };
+
   return (
     <div>
       <div className="task-input">
-        <input type="text" placeholder="Task title" value={title} onChange={(e)=>setTitle(e.target.value)} />
-        <input type="text" placeholder="Description" value={description} onChange={(e)=>setDescription(e.target.value)} />
-        <select value={priority} onChange={(e)=>setPriority(e.target.value)}>
+        <input
+          type="text"
+          placeholder="Task title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <select value={priority} onChange={(e) => setPriority(e.target.value)}>
           <option>High</option>
           <option>Medium</option>
           <option>Low</option>
         </select>
-        <input type="date" value={dueDate} onChange={(e)=>setDueDate(e.target.value)} />
+        <input
+          type="date"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+        />
         <button onClick={handleAddTask}>Add</button>
       </div>
 
-      {tasks.length === 0 ? <p>No tasks yet</p> : (
+      {tasks.length === 0 ? (
+        <p>No tasks yet</p>
+      ) : (
         tasks.map((task) => (
           <div key={task.id} className="task-item">
-            <span className={task.completed ? "completed" : ""}>
-              {task.title} ({task.priority}) {task.dueDate ? `- ${new Date(task.dueDate).toLocaleDateString()}` : ""}
+            <span
+              className={task.completed ? "completed" : ""}
+              style={{ color: getPriorityColor(task) }}
+            >
+              {task.title} ({task.priority}){" "}
+              {task.dueDate
+                ? `- ${new Date(task.dueDate).toLocaleDateString()}`
+                : ""}
             </span>
             {task.description && <p className="task-desc">{task.description}</p>}
             <div className="task-actions">
-              {!task.completed && <button onClick={() => handleCompleteTask(task.id)}>✓</button>}
-              <button onClick={() => handleDeleteTask(task.id)}>✕</button>
+              {!task.completed && (
+                <button title="Mark complete" onClick={() => handleCompleteTask(task.id)}>✓</button>
+              )}
+              <button title="Delete task" onClick={() => handleDeleteTask(task.id)}>✕</button>
             </div>
           </div>
         ))

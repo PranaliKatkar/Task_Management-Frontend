@@ -33,7 +33,7 @@ function Dashboard() {
   if (!folderName.trim()) return;
 
   try {
-    await createFolder(folderName, userEmail);   // <- use service function
+    await createFolder(folderName, userEmail);   
     setFolderName("");
     fetchFolders();
   } catch (error) {

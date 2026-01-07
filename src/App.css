@@ -1,130 +1,69 @@
-body {
-  margin: 0;
-  font-family: "Inter", "Segoe UI", sans-serif;
-  background: #f8fafc;
-  color: #0f172a;
-}
-
+/* ---------- App Layout ---------- */
 .app-layout {
   display: flex;
   min-height: 100vh;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
 }
 
 .page {
   flex: 1;
-  padding: 28px 36px;
-}
-
-.sidebar {
-  width: 250px;
-  background: #0f172a;
-  color: #e5e7eb;
-  padding: 24px 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.logo {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 28px;
-}
-
-.profile {
-  font-size: 13px;
-  color: #94a3b8;
-  margin-bottom: 22px;
-}
-
-.sidebar button {
-  background: transparent;
-  color: #e5e7eb;
-  border: none;
-  padding: 10px 12px;
-  text-align: left;
-  border-radius: 8px;
-  margin-bottom: 6px;
-  cursor: pointer;
-  font-size: 13px;
-}
-
-.sidebar button:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.spacer {
-  flex: 1;
-}
-
-.logout {
-  background: #dc2626 !important;
-  color: #fff !important;
-  text-align: center !important;
-  font-size: 13px;
-}
-
-.page-header {
-  background: #ffffff;
-  padding: 18px 20px;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
-  margin-bottom: 28px;
+  padding: 20px;
 }
 
 .page-header h2 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .form-row {
   display: flex;
   gap: 10px;
-  margin-top: 12px;
+  margin-bottom: 20px;
 }
 
-input {
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  font-size: 13px;
-  outline: none;
+.form-row input[type="text"] {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
 }
 
-input:focus {
-  border-color: #6366f1;
-}
-
-button {
-  padding: 9px 14px;
-  border-radius: 8px;
+.form-row button {
+  padding: 8px 16px;
+  background-color: #2e86de;
+  color: white;
   border: none;
-  background: #6366f1;
-  color: #ffffff;
-  font-size: 13px;
-  font-weight: 500;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-button:hover {
-  background: #4f46e5;
+.form-row button:hover {
+  background-color: #1b4f72;
 }
 
-button:active {
-  transform: scale(0.97);
+/* ---------- Section Title ---------- */
+.section-title {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
 }
 
+/* ---------- Folder Grid ---------- */
 .folder-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
 }
 
+/* ---------- Folder Card ---------- */
 .folder-card {
-  background: #ffffff;
-  padding: 16px;
-  border-radius: 14px;
-  border: 1px solid #e5e7eb;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  padding: 15px;
 }
 
 .folder-header {
@@ -134,94 +73,119 @@ button:active {
   margin-bottom: 10px;
 }
 
-.folder-header h3 {
-  margin: 0;
-  font-size: 15px;
-  font-weight: 600;
+.folder-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #2e86de;
 }
 
-.delete-folder {
+.icon-btn {
   background: transparent;
-  color: #ef4444;
-  padding: 4px 6px;
-  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-.delete-folder:hover {
-  background: rgba(239, 68, 68, 0.1);
+.icon-btn.danger {
+  color: red;
 }
 
+/* ---------- Task List ---------- */
 .task-input {
   display: flex;
-  gap: 6px;
+  flex-direction: column;
+  gap: 8px;
   margin-bottom: 10px;
 }
 
+.task-input input[type="text"],
+.task-input input[type="date"],
+.task-input select {
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.task-input button {
+  align-self: flex-start;
+  padding: 6px 12px;
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.task-input button:hover {
+  background-color: #1e8449;
+}
+
+/* ---------- Task Item ---------- */
 .task-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 6px 8px;
-  background: #f9fafb;
-  border-radius: 6px;
-  font-size: 13px;
-  margin-bottom: 6px;
+  align-items: flex-start;
+  padding: 6px 10px;
+  border-bottom: 1px solid #eee;
 }
 
-.task-actions button {
-  background: transparent;
-  color: #475569;
-  padding: 4px 6px;
-  font-size: 13px;
-}
-
-.task-actions button:hover {
-  background: #e5e7eb;
+.task-item span {
+  font-size: 14px;
 }
 
 .task-item span.completed {
   text-decoration: line-through;
-  color: #94a3b8;
+  color: #999;
 }
 
-.auth-page {
-  height: 100vh;
+.task-desc {
+  font-size: 13px;
+  color: #555;
+  margin: 2px 0 0 0;
+}
+
+.task-actions {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  gap: 5px;
+  margin-left: 10px;
 }
 
-.auth-card {
-  background: #ffffff;
-  width: 340px;
-  padding: 28px;
-  border-radius: 16px;
-  border: 1px solid #e5e7eb;
+.task-actions button {
+  padding: 4px 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
 }
 
-.auth-card h2 {
-  text-align: center;
-  margin-bottom: 18px;
-  font-size: 18px;
+.task-actions button:hover {
+  opacity: 0.8;
 }
 
-.auth-card input,
-.auth-card button {
-  width: 100%;
-  margin-bottom: 12px;
+.task-actions button[title="Mark complete"] {
+  background-color: #2e86de;
+  color: white;
 }
 
-.main-layout {
-  display: flex;
-  min-height: 100vh;
+.task-actions button[title="Delete task"] {
+  background-color: #e74c3c;
+  color: white;
 }
 
-.main-content {
-  flex: 1;
-  padding: 40px;
+/* ---------- Priority Colors ---------- */
+.task-item span {
+  font-weight: 500;
 }
 
-.completed {
-  text-decoration: line-through;
-  color: gray;
+.task-item span[data-priority="High"] {
+  color: #e74c3c; /* red */
+}
+
+.task-item span[data-priority="Medium"] {
+  color: #f39c12; /* orange */
+}
+
+.task-item span[data-priority="Low"] {
+  color: #27ae60; /* green */
 }
