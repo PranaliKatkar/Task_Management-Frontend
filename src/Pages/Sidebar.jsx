@@ -13,15 +13,23 @@ function Sidebar() {
 
   const goDashboard = () => navigate("/dashboard");
   const goAdminUsers = () => navigate("/admin/users");
+  const goAlerts = () => navigate("/alerts");
 
   return (
     <div className="sidebar">
       <h2 className="logo">TaskFlow</h2>
       <p className="profile">👤 {username ? username : "Guest"}</p>
 
-      {role !== "ADMIN" && <button onClick={goDashboard}>Dashboard</button>}
+      {role !== "ADMIN" && (
+        <>
+          <button onClick={goDashboard}>Dashboard</button>
+          <button onClick={goAlerts}>Alerts</button>
+        </>
+      )}
 
-      {role === "ADMIN" && <button onClick={goAdminUsers}>View Users</button>}
+      {role === "ADMIN" && (
+        <button onClick={goAdminUsers}>View Users</button>
+      )}
 
       <div className="spacer" />
 
