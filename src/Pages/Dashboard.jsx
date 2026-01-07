@@ -3,6 +3,8 @@ import FolderCard from "../Pages/FolderCard";
 import Sidebar from "./Sidebar";
 import axios from "axios";
 import API_BASE_URL from "../config/API";
+import { createFolder } from "../Services/FolderService";
+
 
 function Dashboard() {
   const [folders, setFolders] = useState([]);
@@ -28,18 +30,16 @@ function Dashboard() {
   };
 
   const addFolder = async () => {
-    if (!folderName.trim()) return;
-    try {
-      await axios.post(`${API_BASE_URL}/folders`, {
-        name: folderName,
-        user: { email: userEmail }   // <- important change
-      });
-      setFolderName("");
-      fetchFolders();
-    } catch (error) {
-      console.error("Failed to create folder:", error);
-    }
-  };
+  if (!folderName.trim()) return;
+
+  try {
+    await createFolder(folderName, userEmail);   // <- use service function
+    setFolderName("");
+    fetchFolders();
+  } catch (error) {
+    console.error("Failed to create folder:", error.response?.data || error.message);
+  }
+};
 
   const handleFolderDeleted = (deletedFolderId) => {
     setFolders((prevFolders) =>
