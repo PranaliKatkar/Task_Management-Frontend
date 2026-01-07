@@ -8,8 +8,8 @@ export const getTasksByFolder = async (folderId) => {
   return res.data;
 };
 
-export const addTask = async (folderId, title) => {
-  const res = await axios.post(`${BASE_URL}/${folderId}`, { title });
+export const addTask = async (folderId, taskData) => {
+  const res = await axios.post(`${BASE_URL}/${folderId}`, taskData);
   return res.data;
 };
 
