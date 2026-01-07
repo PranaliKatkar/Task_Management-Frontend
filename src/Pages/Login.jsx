@@ -11,9 +11,9 @@ function Login() {
     if (!email || !password) return;
 
     try {
-      if (email === "admin" && password === "admin") {
+      if (email === "admin@gmail.com" && password === "admin") {
         localStorage.setItem("username", "admin");
-        localStorage.setItem("userEmail", "admin@admin.com"); // optional
+        localStorage.setItem("userEmail", "admin@gmail.com");
         localStorage.setItem("role", "ADMIN");
         navigate("/mainPage");
         return;
@@ -23,7 +23,7 @@ function Login() {
 
       localStorage.setItem("username", res.data.username);
       localStorage.setItem("userEmail", res.data.email);
-      localStorage.setItem("role", res.data.role); 
+      localStorage.setItem("role", "USER");
 
       navigate("/mainPage");
     } catch (err) {
@@ -38,20 +38,17 @@ function Login() {
     <div className="auth-page">
       <div className="auth-card">
         <h2>Login</h2>
-
         <input
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-
         <button onClick={login}>Login</button>
         <button onClick={register}>Register</button>
       </div>

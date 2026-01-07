@@ -11,7 +11,6 @@ function Register() {
 
   const register = async () => {
     setError("");
-
     if (!username || !email || !password) {
       setError("All fields are required");
       return;
@@ -24,9 +23,9 @@ function Register() {
         password: password.trim(),
       });
 
-      // ✅ save for sidebar
       localStorage.setItem("username", username.trim());
       localStorage.setItem("userEmail", email.trim());
+      localStorage.setItem("role", "USER");
 
       navigate("/");
     } catch (err) {
@@ -40,7 +39,6 @@ function Register() {
     <div className="auth-page">
       <div className="auth-card">
         <h2>Register</h2>
-
         {error && <p className="error-text">{error}</p>}
 
         <input
