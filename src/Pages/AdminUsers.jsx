@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import API_BASE_URL from "../config/API";
-import AdminSidebar from "../components/AdminSidebar";
+import Sidebar from "./Sidebar";
 
 function AdminUsers() {
   const [users, setUsers] = useState([]);
@@ -22,7 +22,7 @@ function AdminUsers() {
 
   return (
     <div className="app-layout">
-      <AdminSidebar />
+      <Sidebar />
 
       <div className="page">
         <div className="page-header">
