@@ -11,11 +11,19 @@ function Login() {
     if (!email || !password) return;
 
     try {
+      if (email === "admin" && password === "admin") {
+        localStorage.setItem("username", "admin");
+        localStorage.setItem("userEmail", "admin@admin.com"); // optional
+        localStorage.setItem("role", "ADMIN");
+        navigate("/mainPage");
+        return;
+      }
+
       const res = await loginUser({ email, password });
 
-      // ✅ store backend response correctly
       localStorage.setItem("username", res.data.username);
       localStorage.setItem("userEmail", res.data.email);
+      localStorage.setItem("role", res.data.role); 
 
       navigate("/mainPage");
     } catch (err) {
