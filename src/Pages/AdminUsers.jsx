@@ -20,6 +20,8 @@ function AdminUsers() {
   };
 
   return (
+    <div className="app-layout">
+      <Sidebar />
     <div>
       <h2>All Users</h2>
       <table>
@@ -42,6 +44,7 @@ function AdminUsers() {
           ))}
         </tbody>
       </table>
+    </div>
     </div>
   );
 }

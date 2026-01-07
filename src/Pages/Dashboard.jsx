@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import FolderCard from "../Pages/FolderCard";
 import Sidebar from "./Sidebar";
-import { getFolders, createFolder } from "../Services/FolderService";
+import axios from "axios";
+import API_BASE_URL from "../config/API";
 
 function Dashboard() {
   const [folders, setFolders] = useState([]);
   const [folderName, setFolderName] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const userEmail = localStorage.getItem("userEmail");
 
   useEffect(() => {
     fetchFolders();
@@ -15,8 +18,8 @@ function Dashboard() {
   const fetchFolders = async () => {
     setLoading(true);
     try {
-      const data = await getFolders();
-      setFolders(data);
+      const res = await axios.get(`${API_BASE_URL}/folders/user/${userEmail}`);
+      setFolders(res.data);
     } catch (error) {
       console.error("Failed to fetch folders:", error);
     } finally {
@@ -27,7 +30,10 @@ function Dashboard() {
   const addFolder = async () => {
     if (!folderName.trim()) return;
     try {
-      await createFolder(folderName);
+      await axios.post(`${API_BASE_URL}/folders`, {
+        name: folderName,
+        userEmail: userEmail
+      });
       setFolderName("");
       fetchFolders();
     } catch (error) {
