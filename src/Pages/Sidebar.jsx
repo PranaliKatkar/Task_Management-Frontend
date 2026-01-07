@@ -19,11 +19,9 @@ function Sidebar() {
       <h2 className="logo">TaskFlow</h2>
       <p className="profile">👤 {username ? username : "Guest"}</p>
 
-      <button onClick={goDashboard}>Dashboard</button>
+      {role !== "ADMIN" && <button onClick={goDashboard}>Dashboard</button>}
 
-      {role === "ADMIN" && (
-        <button onClick={goAdminUsers}>View Users</button>
-      )}
+      {role === "ADMIN" && <button onClick={goAdminUsers}>View Users</button>}
 
       <div className="spacer" />
 
