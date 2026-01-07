@@ -18,7 +18,6 @@ function FolderCard({ folder, onFolderDeleted }) {
     <div className="folder-card">
       <div className="folder-header">
         <h3 className="folder-title">{folder.name}</h3>
-
         <button
           className="icon-btn danger"
           title="Delete folder"
@@ -27,7 +26,6 @@ function FolderCard({ folder, onFolderDeleted }) {
           ✕
         </button>
       </div>
-
       <TaskList folderId={folder.id} />
     </div>
   );

@@ -5,7 +5,6 @@ import axios from "axios";
 import API_BASE_URL from "../config/API";
 import { createFolder } from "../Services/FolderService";
 
-
 function Dashboard() {
   const [folders, setFolders] = useState([]);
   const [folderName, setFolderName] = useState("");
@@ -30,20 +29,20 @@ function Dashboard() {
   };
 
   const addFolder = async () => {
-  if (!folderName.trim()) return;
+    if (!folderName.trim()) return;
 
-  try {
-    await createFolder(folderName, userEmail);   
-    setFolderName("");
-    fetchFolders();
-  } catch (error) {
-    console.error("Failed to create folder:", error.response?.data || error.message);
-  }
-};
+    try {
+      await createFolder(folderName, userEmail);
+      setFolderName("");
+      fetchFolders();
+    } catch (error) {
+      console.error("Failed to create folder:", error.response?.data || error.message);
+    }
+  };
 
   const handleFolderDeleted = (deletedFolderId) => {
-    setFolders((prevFolders) =>
-      prevFolders.filter((folder) => folder.id !== deletedFolderId)
+    setFolders(prevFolders =>
+      prevFolders.filter(folder => folder.id !== deletedFolderId)
     );
   };
 
@@ -69,7 +68,7 @@ function Dashboard() {
           <p>Loading folders...</p>
         ) : (
           <div className="folder-grid">
-            {folders.map((folder) => (
+            {folders.map(folder => (
               <FolderCard
                 key={folder.id}
                 folder={folder}
