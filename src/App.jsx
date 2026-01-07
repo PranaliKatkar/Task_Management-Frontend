@@ -5,6 +5,7 @@ import Register from './Pages/Register';
 import Dashboard from './Pages/Dashboard';
 import MainPage from './Pages/MainPage';
 import AdminUsers from './Pages/AdminUsers';
+import Alerts from './Pages/Alert';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path='/mainPage' element={<MainPage/>}/>
         <Route path="/admin/users" element={<AdminUsers />} />
+        <Route path="/alerts" element={<Alerts />} />
       </Routes>
     </BrowserRouter>
   );
