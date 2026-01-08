@@ -7,13 +7,26 @@ function Alerts() {
   const [alerts, setAlerts] = useState([]);
   const userEmail = localStorage.getItem("userEmail");
 
-  useEffect(() => {
+  const fetchAlerts = async () => {
     if (!userEmail) return;
 
-    axios
-      .get(`${API_BASE_URL}/alerts/user/${userEmail}`)
-      .then(res => setAlerts(res.data))
-      .catch(err => console.error("Failed to load alerts", err));
+    try {
+      const res = await axios.get(
+        `${API_BASE_URL}/alerts/user/${userEmail}`
+      );
+      setAlerts(res.data);
+    } catch (err) {
+      console.error("Failed to load alerts", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchAlerts(); 
+
+    
+    const interval = setInterval(fetchAlerts, 60000); 
+
+    return () => clearInterval(interval);
   }, [userEmail]);
 
   const handleDeleteAlert = async (alertId) => {
