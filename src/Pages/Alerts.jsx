@@ -19,7 +19,6 @@ function Alerts() {
   return (
     <div className="app-layout">
       <Sidebar />
-
       <div className="page">
         <h2>Alerts</h2>
 
