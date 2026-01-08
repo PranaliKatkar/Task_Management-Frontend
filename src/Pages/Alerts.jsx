@@ -5,7 +5,7 @@ import Sidebar from "./Sidebar";
 
 function Alerts() {
   const [alerts, setAlerts] = useState([]);
-  const userEmail = localStorage.getItem("username");
+  const userEmail = localStorage.getItem("userEmail");
 
   useEffect(() => {
     if (!userEmail) return;
