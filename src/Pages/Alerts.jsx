@@ -21,20 +21,15 @@ function Alerts() {
   }, [userEmail]);
 
   useEffect(() => {
-    fetchAlerts(); // initial load
-
-    // poll every 60 seconds
+    fetchAlerts();
     const interval = setInterval(fetchAlerts, 60000);
-
     return () => clearInterval(interval);
   }, [fetchAlerts]);
 
   const handleDeleteAlert = async (alertId) => {
     try {
       await axios.delete(`${API_BASE_URL}/alerts/${alertId}`);
-      setAlerts((prev) =>
-        prev.filter((alert) => alert.id !== alertId)
-      );
+      setAlerts(prev => prev.filter(alert => alert.id !== alertId));
     } catch (err) {
       console.error("Failed to delete alert", err);
     }
@@ -43,20 +38,17 @@ function Alerts() {
   return (
     <div className="app-layout">
       <Sidebar />
-
       <div className="page">
         <h2>Alerts</h2>
-
         {alerts.length === 0 ? (
           <p>No alerts</p>
         ) : (
-          alerts.map((alert) => (
+          alerts.map(alert => (
             <div
               key={alert.id}
               className={`alert-card ${alert.alertType?.toLowerCase() || ""}`}
             >
               <span>{alert.message}</span>
-
               <button
                 className="alert-close"
                 onClick={() => handleDeleteAlert(alert.id)}
