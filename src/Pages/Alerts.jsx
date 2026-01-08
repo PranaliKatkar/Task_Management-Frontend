@@ -16,6 +16,15 @@ function Alerts() {
       .catch(err => console.error("Failed to load alerts", err));
   }, [userEmail]);
 
+  const handleDeleteAlert = async (alertId) => {
+    try {
+      await axios.delete(`${API_BASE_URL}/alerts/${alertId}`);
+      setAlerts(prev => prev.filter(alert => alert.id !== alertId));
+    } catch (err) {
+      console.error("Failed to delete alert", err);
+    }
+  };
+
   return (
     <div className="app-layout">
       <Sidebar />
@@ -30,7 +39,13 @@ function Alerts() {
               key={alert.id}
               className={`alert-card ${alert.alertType.toLowerCase()}`}
             >
-              {alert.message}
+              <span>{alert.message}</span>
+              <button
+                className="alert-close"
+                onClick={() => handleDeleteAlert(alert.id)}
+              >
+                ✕
+              </button>
             </div>
           ))
         )}
