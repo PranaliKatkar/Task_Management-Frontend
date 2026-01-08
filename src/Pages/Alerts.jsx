@@ -12,7 +12,7 @@ function Alerts() {
 
     try {
       const res = await axios.get(
-        `${API_BASE_URL}/alerts/user/${userEmail}`
+        `${API_BASE_URL}/alerts/user/${encodeURIComponent(userEmail)}`
       );
       setAlerts(res.data || []);
     } catch (err) {
@@ -28,7 +28,9 @@ function Alerts() {
 
   const handleDeleteAlert = async (alertId) => {
     try {
-      await axios.delete(`${API_BASE_URL}/alerts/${alertId}`);
+      await axios.delete(
+        `${API_BASE_URL}/alerts/${alertId}`
+      );
       setAlerts(prev => prev.filter(alert => alert.id !== alertId));
     } catch (err) {
       console.error("Failed to delete alert", err);
