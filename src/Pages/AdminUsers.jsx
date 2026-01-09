@@ -42,6 +42,7 @@ function AdminUsers() {
             <tr style={{ background: "#f9fafb" }}>
               <th style={{ padding: "12px", textAlign: "left" }}>Username</th>
               <th style={{ padding: "12px", textAlign: "left" }}>Email</th>
+              <th style={{ padding: "12px", textAlign: "left" }}>Contact No</th>
               <th style={{ padding: "12px", textAlign: "left" }}>Action</th>
             </tr>
           </thead>
@@ -49,7 +50,7 @@ function AdminUsers() {
           <tbody>
             {users.length === 0 ? (
               <tr>
-                <td colSpan="3" style={{ padding: "14px", textAlign: "center" }}>
+                <td colSpan="4" style={{ padding: "14px", textAlign: "center" }}>
                   No users found
                 </td>
               </tr>
@@ -58,6 +59,7 @@ function AdminUsers() {
                 <tr key={user.id} style={{ borderTop: "1px solid #e5e7eb" }}>
                   <td style={{ padding: "12px" }}>{user.username}</td>
                   <td style={{ padding: "12px" }}>{user.email}</td>
+                  <td style={{ padding: "12px" }}>{user.phoneNumber}</td>
                   <td style={{ padding: "12px" }}>
                     <button
                       className="delete-folder"

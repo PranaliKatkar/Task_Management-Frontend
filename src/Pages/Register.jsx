@@ -6,12 +6,15 @@ function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState(""); // ✅ ADD
   const [error, setError] = useState("");
+
   const navigate = useNavigate();
 
   const register = async () => {
     setError("");
-    if (!username || !email || !password) {
+
+    if (!username || !email || !password || !phoneNumber) {
       setError("All fields are required");
       return;
     }
@@ -21,6 +24,7 @@ function Register() {
         username: username.trim(),
         email: email.trim(),
         password: password.trim(),
+        phoneNumber: phoneNumber.trim(), 
       });
 
       localStorage.setItem("username", username.trim());
@@ -29,9 +33,7 @@ function Register() {
 
       navigate("/");
     } catch (err) {
-      setError(
-        err.response?.data || "Registration failed. Please try again."
-      );
+      setError(err.response?.data || "Registration failed");
     }
   };
 
@@ -53,6 +55,16 @@ function Register() {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          type="tel"
+          placeholder="Enter 10-digit mobile number"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+          maxLength={10}
+          pattern="[6-9][0-9]{9}"
+          required
         />
 
         <input
